@@ -1,0 +1,101 @@
+body {
+    font: 15px/1.5 Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header .container { 
+	text-align: center;
+}
+
+.outside_section {
+	width: 80%;
+	height: 200px;
+	margin: auto;
+	padding: 10px;
+}
+
+header #welcome {
+	color: #000000;
+	text-align: center;
+}
+#user_and_pass {
+	width: 15%;
+	height: 200px;
+	float: left;
+}
+
+#createCustomer {
+	margin-left: 15%;
+	height: 200px;
+}
+#intro {
+	text-align: center;
+	
+}
+#beginning_selection {
+	text-align: center;
+}
+#submit {
+	text-align: center;
+}
+.buttons {
+	text-align:center;
+}
+
+#submit {
+	border: none;
+    padding: 8px 14px;
+    border: 2px solid #000000;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+#signIn {
+    border: none;
+    padding: 10px 20px;
+    border: 2px solid #000000;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+#createCustomer {
+    border: none;
+    padding: 10px 20px;
+    border: 2px solid #000000;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+footer {
+    padding: 20px;
+    margin-top: 550px;
+    color: #000000;
+    text-align: center;
+}
+
+
+
+/* Media Queries */
+@media(max-width: 768px) {
+    header #branding,
+    header nav,
+    header nav li,
+    #quote h1,
+    #quote form,
+    #boxes .box {
+        float: none;
+        text-align: center;
+        width:100%;
+    }
+}

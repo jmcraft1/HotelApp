@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Create Account</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+</head>
+<body>
+	<!-- hero -------------------------------------------->
+	<section class="hero is-primary">
+		<div class="hero-body">
+			<div class="container">
+				<br>
+				<h1 class="title is-1">New World Hotels</h1>
+				<h2 class="subtitle">Where your stay is out of this world!</h2>
+			</div>
+		</div>
+	</section>
+
+	<!-- columns ------------------------------------------>
+	<div class="columns is-mobile">
+		<div class="column">
+			<div class="card">
+				<div class="card-content">
+					<figure class="image is-600x480">
+						<img src="images/grandHotel.png">
+					</figure>
+				</div>
+			</div>
+		</div>
+		<div class="column" id="mainColumn">
+			<div class="card">
+				<div class="card-content">
+					<form method="post" action="CreateCustomerServlet" onsubmit="return Validate()" name="vform">
+						<div class="field">
+							<br>
+							<div class="control">
+								<input class="input is-primary" name="fName" id="fName"
+									type="text" placeholder="First Name">
+								<div id="fNameError" class="error has-text-danger"></div>
+							</div>
+						</div>
+						<div class="field">
+							<div class="control">
+								<input class="input is-primary" name="lName" id="lName"
+									type="text" placeholder="Last Name">
+									<div id="lNameError" class="error has-text-danger"></div>
+							</div>
+						</div>
+						<div class="field">
+							<div class="control">
+								<input class="input is-primary" name="address" id="address"
+									type="text" placeholder="Address">
+									<div id="addyError" class="error has-text-danger"></div>
+							</div>
+						</div>
+						<div class="field">
+							<div class="control">
+								<input class="input is-primary" name="city" id="city"
+									type="text" placeholder="City">
+									<div id="ctyError" class="error has-text-danger"></div>
+							</div>
+						</div>
+						<div class="field">
+							<div class="control">
+								<input class="input is-primary" name="state" id="state"
+									type="text" placeholder="State">
+									<div id="stError" class="error has-text-danger"></div>
+							</div>
+						</div>
+						<div class="field">
+							<div class="control">
+								<input class="input is-primary" name="zip" id="zip" type="text"
+									placeholder="Zip Code">
+									<div id="zipError" class="error has-text-danger"></div>
+							</div>
+						</div>
+						<div class="field">
+							<div class="control">
+								<input class="input is-primary" name="phone" id="phone"
+									type="text" placeholder="Phone Number">
+									<div id="phError" class="error has-text-danger"></div>
+							</div>
+						</div>
+						<div class="field">
+							<div class="control">
+								<input class="input is-primary" name="email" id="email"
+									type="email" placeholder="Email">
+									<div id="emError" class="error has-text-danger"></div>
+							</div>
+						</div>
+						<div class="field">
+							<div class="control">
+								<input class="input is-primary" name="pass" id="pass"
+									type="password" placeholder="Password">
+									<div id="paError" class="error has-text-danger"></div>
+							</div>
+						</div>
+						<div class="field">
+							<div class="control">
+								<input class="input is-primary" name="confirmPass"
+									id="confirmPass" type="password" placeholder="Confirm Password">
+									<div id="cpaError" class="error has-text-danger"></div>
+									<div id="mismatchError" class="error has-text-danger"></div>
+							</div>
+						</div>
+						<div class="box has-text-centered">
+							<input class="button is-primary is-fullwidth" type="submit" name="register" value="Register">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="column">
+			<div class="card">
+				<div class="card-content">
+					<figure class="image is-600x480">
+						<img src="images/hotel2.jpg">
+					</figure>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="HotelAjax.js"></script>
+<script defer
+	src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+</html>
