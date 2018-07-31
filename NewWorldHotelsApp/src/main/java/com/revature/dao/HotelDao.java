@@ -43,4 +43,6 @@ public class HotelDao {
 
 		return hotels;
 	}
+	
+	
 }

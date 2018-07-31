@@ -48,8 +48,10 @@ public class CustomerDao {
 
 	public boolean createCustomer(Customer c) {
 
+		System.out.println("Inside CustomerDao.CreateCustomer: " + c.toString());
 		CallableStatement cs = null;
 		try (Connection conn = ConnectionUtil.getConnection()) {
+			System.out.println("Entered try");
 			conn.setAutoCommit(true);
 			String sql = "{CALL SP_INSERT_CUSTOMER (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
@@ -62,7 +64,10 @@ public class CustomerDao {
 			cs.setString(6, c.getZip());
 			cs.setString(7, c.getPhone());
 			cs.setString(8, c.getEmail());
+
+			
 			MessageDigest md = MessageDigest.getInstance("MD5");
+			System.out.println(c.getPassword());
 			md.update(c.getPassword().getBytes());
 			byte[] bytes = md.digest();
 			StringBuilder sb = new StringBuilder();
@@ -70,6 +75,8 @@ public class CustomerDao {
 				sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
 			}
 			String generatedPassword = sb.toString();
+			
+			System.out.println(generatedPassword);
 			cs.setString(9, generatedPassword);
 
 			c.setPassword(generatedPassword);
@@ -98,7 +105,7 @@ public class CustomerDao {
 			while (rs.next()) {
 				e = rs.getString("password");
 			}
-			System.out.println(e);
+			
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			md.update(pass.getBytes());
 			byte[] bytes = md.digest();
@@ -107,7 +114,7 @@ public class CustomerDao {
 				sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
 			}
 			String generatedPassword = sb.toString();
-			System.out.println(generatedPassword);
+			
 			return (generatedPassword.equals(e));
 		} catch (Exception ex) {
 			ex.printStackTrace();

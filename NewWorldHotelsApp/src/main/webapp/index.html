@@ -72,7 +72,46 @@
 		  </div>
 		</footer>
 	</body>
-	
-	<script src="HotelAjax.js"></script>
 	<script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+	<script>
+		var em = document.forms["siform"]["email"];
+		var pw = document.forms["siform"]["pass"];
+		
+		var emailError = document.getElementById("emailError");
+		var passError = document.getElementById("passError");
+		
+		em.addEventListener("blur", eVerify, true);
+		pw.addEventListener("blur", pVerify, true);
+		
+		function SignInVal() {
+			if (em.value == "") {
+				em.style.border = "1px solid red";
+				emailError.textContent = "Email address is required!";
+				em.focus();
+				return false;
+			}
+			if (pw.value == "") {
+				pw.style.border = "1px solid red";
+				passError.textContent = "Password is required!";
+				pw.focus();
+				return false;
+			}
+		}
+		
+		function eVerify() {
+			if(em.value !="") {
+				em.style.border = "1px solid #5E6E66";
+				emailError.innerHTML = "";
+				return true;
+			}
+		}
+		function pVerify() {
+			if(pw.value !="") {
+				pw.style.border = "1px solid #5E6E66";
+				passError.innerHTML = "";
+				return true;
+			}
+		}
+
+	</script>
 </html>

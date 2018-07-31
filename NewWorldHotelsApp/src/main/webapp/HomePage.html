@@ -1,23 +1,86 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>Home Page</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
-	</head>
-	<body>
-		<!-- hero -------------------------------------------->
-			<section class="hero is-primary">
-				<div class="hero-body">
-					<div class="container">
-						<br>
-						<h1 class="title is-1">New World Hotels</h1>
-						<h2 class="subtitle">Where your stay is out of this world!</h2>
+<head>
+<meta charset="utf-8">
+<title>Home Page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+</head>
+<body>
+	<!-- hero -------------------------------------------->
+	<section class="hero is-primary">
+		<div class="hero-body">
+			<div class="container">
+				<br>
+				<h1 class="title is-1 has-text-grey-dark">Welcome to the
+					customer home page</h1>
+			</div>
+			<nav>
+				<ul class="list has-text-right has-text-grey-dark">
+					<li class="current"><a href="HomePage.html">Home</a></li>
+					<li><a href="reservations.html">Make a Reservation</a></li>
+					<li><a href="profile.html">Profile</a></li>
+					<li><a href="index.html">Sign Out</a></li>
+				</ul>
+			</nav>
+		</div>
+	</section>
+	<section class="section">
+		<div class="columns">
+			<div class="column">
+				<div class="card">
+					<div class="card-content">
+						<h2 id="reservationList">
+			               
+			            </h2>
+			            <form method="GET" action="ReservationServlet" name="seeReservations" onsubmit="loadReservations()">
+				            <input class="input is-primary" type="email" name="email" id="email" placeholder="Email">
+				            <input class="button is-primary" type="submit" name="seeRes" value="View Reservations">
+			            </form>
 					</div>
 				</div>
-            </section>
-	</body>
-	<script src="HotelAjax.js"></script>
-	<script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+			</div>
+			<div class="column">
+				<div class="card">
+					<div class="card-content">
+						<div class="content">
+							<h3>Put message stream here (all messages to and from this user)</h3>
+							<h5>Text area to send message to hotel goes here</h5>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="column">
+				<div class="card">
+					<div class="card-content">
+						<div class="content">
+							<form method="GET" action="RoomServlet" name="seeRooms" onsubmit="getSelection()">
+								<label class="container has-text-weight-bold" >View available hotel rooms here</label> 
+								<select name="whichLoc" id="availRooms">
+								
+									<option value="1">Midtown Location</option>
+									<option value="2">East Memphis Location</option>
+									<option value="3">Downtown Location</option>
+								 
+								</select> 
+								<br> 
+								<br>
+								<input class="button is-primary" type="submit" name="seeRooms" value="View available rooms">
+							</form>
+							<div id="roomList"></div>
+
+							
+
+							<h3>Review reservation and status here</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+<script src="HotelAjax.js"></script>
+<script defer
+	src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
 </html>

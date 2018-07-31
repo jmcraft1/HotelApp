@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.revature.dao.CustomerDao;
+import com.revature.dao.EmployeeDao;
 
 /**
  * Servlet implementation class SignInServlet
@@ -39,10 +40,20 @@ public class SignInServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String email = request.getParameter("email");
 		String pass = request.getParameter("pass");
-		System.out.println(email + " " + pass);
+		
 		CustomerDao cd = new CustomerDao();
+		EmployeeDao ed = new EmployeeDao();
+		String retEmail = "<h3>Logged in as " + email + "</h3>";
 		if(cd.verifyCred(email, pass)) {
 			RequestDispatcher view = request.getRequestDispatcher("HomePage.html");
+			request.setAttribute("email", retEmail);
+			view.forward(request, response);
+		} else if (ed.verifyCred(email, pass)){
+			RequestDispatcher view = request.getRequestDispatcher("EmployeeHomePage.html");
+			request.setAttribute("email", retEmail);
+			view.forward(request, response);
+		} else {
+			RequestDispatcher view = request.getRequestDispatcher("index.html");
 			view.forward(request, response);
 		}
 	}

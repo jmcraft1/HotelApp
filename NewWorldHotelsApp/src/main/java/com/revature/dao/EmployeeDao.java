@@ -1,5 +1,6 @@
 package com.revature.dao;
 
+import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,5 +45,38 @@ public class EmployeeDao {
 		}
 
 		return employees;
+	}
+	
+public boolean verifyCred(String email, String pass) {
+		
+		//System.out.println(pass);
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			String sql = "SELECT PASSWORD FROM EMPLOYEE WHERE EMAIL = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
+			rs = ps.executeQuery();
+			String e = "";
+			while (rs.next()) {
+				e = rs.getString("password");
+			}
+			System.out.println(e);
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(pass.getBytes());
+			byte[] bytes = md.digest();
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < bytes.length; i++) {
+				sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+			}
+			String generatedPassword = sb.toString();
+			System.out.println(generatedPassword);
+			return (generatedPassword.equals(e));
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return false;
+		
 	}
 }

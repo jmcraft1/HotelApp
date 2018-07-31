@@ -42,16 +42,25 @@ public class RoomDao {
 		return rooms;
 	}
 	
-	public List<Room> getAllAvailableRooms() {
+	public List<Room> getAllAvailableRooms(String whichLocation) {
 		
 		PreparedStatement ps = null;
 		Room r = null;
 		List<Room> rooms = new ArrayList<Room>();
 
+		System.out.println("Entered roomdao");
 		try (Connection conn = ConnectionUtil.getConnection()) {
-			String sql = "SELECT * FROM ROOM WHERE OCCUPIED = ?";
+			System.out.println("Entered try");
+			String sql = "SELECT * FROM ROOMS WHERE OCCUPIED = ? AND HOTEL_ID = ?";
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, "Y");
+			ps.setString(1, "N");
+			if(whichLocation.equals("1")) {
+				ps.setInt(2,  1);
+			} else if (whichLocation.equals("2")) {
+				ps.setInt(2,  2);
+			} else if (whichLocation.equals("3")) {
+				ps.setInt(2,  3);
+			}
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {

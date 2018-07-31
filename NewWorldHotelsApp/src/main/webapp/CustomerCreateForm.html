@@ -8,7 +8,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
 </head>
 <body>
-	<!-- hero -------------------------------------------->
+	<!-- hero (Bulma calls the haeder, hero-------------------------------------------->
 	<section class="hero is-primary">
 		<div class="hero-body">
 			<div class="container">
@@ -124,7 +124,184 @@
 		</div>
 	</div>
 </body>
-<script src="HotelAjax.js"></script>
 <script defer
 	src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+	
+<script>
+	var fName = document.forms["vform"]["fName"];
+	var lName = document.forms["vform"]["lName"];
+	var address = document.forms["vform"]["address"];
+	var city = document.forms["vform"]["city"];
+	var state = document.forms["vform"]["state"];
+	var zip = document.forms["vform"]["zip"];
+	var phone = document.forms["vform"]["phone"];
+	var email = document.forms["vform"]["email"];
+	var pass = document.forms["vform"]["pass"];
+	var confirmPass = document.forms["vform"]["confirmPass"];
+	
+	var fNameError = document.getElementById("fNameError");
+	var lNameError = document.getElementById("lNameError");
+	var addyError = document.getElementById("addyError");
+	var ctyError = document.getElementById("ctyError");
+	var stError = document.getElementById("stError");
+	var zipError = document.getElementById("zipError");
+	var emError = document.getElementById("emError");
+	var phError = document.getElementById("phError");
+	var paError = document.getElementById("paError");
+	var cpaError = document.getElementById("cpaError");
+	var mismatchError = document.getElementById("mismatchError");
+	
+	fName.addEventListener("blur", fNameVerify, true);
+	lName.addEventListener("blur", lNameVerify, true);
+	address.addEventListener("blur", addressVerify, true);
+	city.addEventListener("blur", cityVerify, true);
+	state.addEventListener("blur", stateVerify, true);
+	zip.addEventListener("blur", zipVerify, true);
+	phone.addEventListener("blur", phoneVerify, true);
+	email.addEventListener("blur", emailVerify, true);
+	pass.addEventListener("blur", passVerify, true);
+	confirmPass.addEventListener("blur", confirmPassVerify, true);
+	
+	function Validate() {
+		if (fName.value == "") {
+			fName.style.border = "1px solid red";
+			fNameError.textContent = "First name is required!";
+			fName.focus();
+			return false;
+		}
+		if (lName.value == "") {
+			lName.style.border = "1px solid red";
+			lNameError.textContent = "Last name is required!";
+			lName.focus();
+			return false;
+		}
+		if (address.value == "") {
+			address.style.border = "1px solid red";
+			addyError.textContent = "Address is required!";
+			address.focus();
+			return false;
+		}
+		if (city.value == "") {
+			city.style.border = "1px solid red";
+			ctyError.textContent = "City is required!";
+			city.focus();
+			return false;
+		}
+		if (state.value == "") {
+			state.style.border = "1px solid red";
+			stError.textContent = "State is required!";
+			state.focus();
+			return false;
+		}
+		if (zip.value == "") {
+			zip.style.border = "1px solid red";
+			zipError.textContent = "Zip code is required!";
+			zip.focus();
+			return false;
+		}
+		if (phone.value == "") {
+			phone.style.border = "1px solid red";
+			phError.textContent = "Phone number is required!";
+			phone.focus();
+			return false;
+		}
+		if (email.value == "") {
+			email.style.border = "1px solid red";
+			emError.textContent = "Email address is required!";
+			email.focus();
+			return false;
+		}
+		if (pass.value == "") {
+			pass.style.border = "1px solid red";
+			paError.textContent = "Password is required!";
+			pass.focus();
+			return false;
+		}
+		if (confirmPass.value == "") {
+			confirmPass.style.border = "1px solid red";
+			cpaError.textContent = "Please confirm password!";
+			fName.focus();
+			return false;
+		}
+		if (pass.value != confirmPass.value) {
+			pass.style.border = "1px solid red";
+			confirmPass.style.border = "1px solid red";
+			mismatchError.textContent = "Passwords do not match!";
+			confirmPass.focus();
+			return false;
+		}
+	}
+	
+	function fNameVerify() {
+		if(fName.value !="") {
+			fName.style.border = "1px solid #5E6E66";
+			fNameError.innerHTML = "";
+			return true;
+		}
+	}
+	function lNameVerify() {
+		if(lName.value !="") {
+			lName.style.border = "1px solid #5E6E66";
+			lNameError.innerHTML = "";
+			return true;
+		}
+	}
+	function addressVerify() {
+		if(address.value !="") {
+			address.style.border = "1px solid #5E6E66";
+			addyError.innerHTML = "";
+			return true;
+		}
+	}
+	function cityVerify() {
+		if(city.value !="") {
+			city.style.border = "1px solid #5E6E66";
+			ctyError.innerHTML = "";
+			return true;
+		}
+	}
+	function stateVerify() {
+		if(state.value !="") {
+			state.style.border = "1px solid #5E6E66";
+			stError.innerHTML = "";
+			return true;
+		}
+	}
+	function zipVerify() {
+		if(zip.value !="") {
+			zip.style.border = "1px solid #5E6E66";
+			zipError.innerHTML = "";
+			return true;
+		}
+	}
+	function phoneVerify() {
+		if(phone.value !="") {
+			phone.style.border = "1px solid #5E6E66";
+			phError.innerHTML = "";
+			return true;
+		}
+	}
+	function emailVerify() {
+		if(email.value !="") {
+			email.style.border = "1px solid #5E6E66";
+			emError.innerHTML = "";
+			return true;
+		}
+	}
+	function passVerify() {
+		if(pass.value !="") {
+			pass.style.border = "1px solid #5E6E66";
+			paError.innerHTML = "";
+			return true;
+		}
+	}
+	function confirmPassVerify() {
+		if(confirmPass.value !="") {
+			pass.style.border = "1px solid #5E6E66";
+			paError.innerHTML = "";
+			return true;
+		}
+	}
+</script>
 </html>
+

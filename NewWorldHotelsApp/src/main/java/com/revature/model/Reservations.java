@@ -12,10 +12,9 @@ public class Reservations {
 	private Date check_in_date;
 	private Date check_out_date;
 	private double total_price;
-	private String method_payment;
 
 	public Reservations(int reservation_id, int hotel_id, int room_id, String room_num, int cust_id, Date check_in_date,
-			Date check_out_date, double total_price, String method_payment) {
+			Date check_out_date, double total_price) {
 		super();
 		this.reservation_id = reservation_id;
 		this.hotel_id = hotel_id;
@@ -25,7 +24,6 @@ public class Reservations {
 		this.check_in_date = check_in_date;
 		this.check_out_date = check_out_date;
 		this.total_price = total_price;
-		this.method_payment = method_payment;
 	}
 
 	public Reservations() {
@@ -95,14 +93,6 @@ public class Reservations {
 
 	public void setTotal_price(double total_price) {
 		this.total_price = total_price;
-	}
-
-	public String getMethod_payment() {
-		return method_payment;
-	}
-
-	public void setMethod_payment(String method_payment) {
-		this.method_payment = method_payment;
 	}
 
 }

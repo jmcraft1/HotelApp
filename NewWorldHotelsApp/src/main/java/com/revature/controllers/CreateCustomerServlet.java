@@ -53,8 +53,9 @@ public class CreateCustomerServlet extends HttpServlet {
 		String pass = request.getParameter("pass");
 		
 		Customer c = new Customer(fName, lName, address, city, state, zip, phone, email, pass);
-		
+		System.out.println("In CreateCustomerServlet: " + c.toString());
 		CustomerDao cd = new CustomerDao();
+		
 		
 		if (cd.createCustomer(c)) {
 			RequestDispatcher view = request.getRequestDispatcher("HomePage.html");
@@ -64,7 +65,7 @@ public class CreateCustomerServlet extends HttpServlet {
 			pw.println("<h2>Could not connect to database</h2>");
 			pw.println("<h2>Please try again later</h2>");
 		}
-		 
+		
 		
 	}
 
