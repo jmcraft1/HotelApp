@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.revature.model.Reservations;
-import com.revature.model.Room;
 import com.revature.util.ConnectionUtil;
 
 public class ReservationDao {
@@ -65,6 +64,11 @@ public class ReservationDao {
 		
 
 		return rservs;
+		
+	}
+	
+	public boolean makeReservation(String email, String whichLoc, String whatRoom, Date checkInDate, Date checkOutDate) {
+		return false;
 		
 	}
 }

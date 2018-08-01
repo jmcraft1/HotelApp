@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Reservation Form</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+	</head>
+	<body>
+		<section class="hero is-primary">
+			<div class="hero-body">
+				<div class="container">
+					<br>
+					<h1 class="title is-1">New World Hotels</h1>
+					<h2 class="subtitle">Where your stay is out of this world!</h2>
+				</div>
+			</div>
+		</section>
+    
+        <div class="columns is-mobile">
+            <div class="column">
+                <div class="card">
+                    <div class="card-content">
+                        <form method="POST" action="ReservationServlet" onsubmit="return resVal()" name="reservation">
+                            <br>
+                            <div class="control">
+                            	<p class="text has-text-weight-bold">We will use the information associated with this email address.</p>
+                            	<br>
+                                <input class="input is-primary" name="email" id="email" type="email" placeholder="Email">
+                                <div id="emError" class="error has-text-danger"></div>
+                            </div>
+                            <br>
+                            <div>
+                                <label class="container has-text-weight-bold" >We have 3 locations to choose from.</label>
+                                <select name="whichLoc" id="whichLoc">
+                                    <option value="">Choose a location</option>
+                                    <option value="1">Midtown Location</option>
+                                    <option value="2">East Memphis Location</option>
+                                    <option value="3">Downtown Location</option>
+                                </select>
+                            </div>
+                            <br>
+                            <div>
+                                <label class="container has-text-weight-bold" >Please select a type of room.</label>
+                                <select name="whatRoom" id="whatRoom">
+                                    <option value="">Choose a room type</option>
+                                    <option value="single">Single $100</option>
+                                    <option value="double">Double $150</option>
+                                    <option value="suite">Suite $300</option>
+                                </select>
+                            </div>
+                            <br>
+                            <div>
+                                <label>Check In Date: </label>
+                                <input class="input is-primary" type="date" name="checkIn" id="checkIn"/>
+                                <div id="cidError" class="error has-text-danger"></div>
+                            </div>
+                            <br>
+                            <div>
+                                <label>Check Out Date: </label>
+                                <input class="input is-primary" type="date" name="checkOut" id="checkOut"/>
+                                <div id="codError" class="error has-text-danger"></div>
+                            </div>
+                            <br>
+                            <div class="box has-text-centered">
+                                <input class="button is-primary is-fullwidth" type="submit" name="subReg" value="Submit Reservation">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="column"></div>
+            <div class="column"></div>
+        </div>
+	</body>
+	
+<script>
+	var email = document.forms["reservation"]["email"];
+	var checkIn = document.forms["reservaton"]["checkIn"];
+	var checkOut = document.forms["reservation"]["checkOut"];
+	
+	var emError = document.getElementById("emError");
+	var cidError = document.getElementById("codError");
+	var codError = document.getElementById("cidError");
+	
+	email.addEventListener("blur", emailVerify, true);
+	checkIn.addEventListener("blur", checkInVerify, true);
+	checkOut.addEventListener("blur", checkOutVerify, true);
+	
+	function resVal() {
+		if (email.value == "") {
+			email.style.border = "1px solid red";
+			emError.textContent = "Email address is required!";
+			email.focus();
+			return false;
+		}if (checkIn.value == "") {
+			checkIn.style.border = "1px solid red";
+			cidError.textContent = "Email address is required!";
+			checkIn.focus();
+			return false;
+		}if (checkOut.value == "") {
+			checkOut.style.border = "1px solid red";
+			codError.textContent = "Email address is required!";
+			checkOut.focus();
+			return false;
+		}
+	}
+	function emailVerify() {
+		if(email.value !="") {
+			email.style.border = "1px solid #5E6E66";
+			emError.innerHTML = "";
+			return true;
+		}
+	}
+	function checkInVerify() {
+		if(checkIn.value !="") {
+			checkIn.style.border = "1px solid #5E6E66";
+			cidError.innerHTML = "";
+			return true;
+		}
+	}
+	function checkOutVerify() {
+		if(checkOut.value !="") {
+			checkOut.style.border = "1px solid #5E6E66";
+			codError.innerHTML = "";
+			return true;
+		}
+	}
+</script>
+
+</html>
+

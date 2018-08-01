@@ -29,3 +29,21 @@ function getSelection() {
 	xhr.open('GET', '/NewWorldHotelsApp/RoomServlet');
 	xhr.send();
 }
+
+function getMessages() {
+	let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        console.log(this.readyState);
+
+        if (this.readyState == 4) {
+            if (this.status == 200) {
+                document.getElementById('messToAndfrom').innerHTML = xhr.responseText;
+            } else {
+                console.log("error");
+            }   
+        }
+    }
+
+    xhr.open('GET', '/NewWorldHotelsApp/MessageServlet');
+    xhr.send();
+}

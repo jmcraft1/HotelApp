@@ -19,7 +19,7 @@
 			<nav>
 				<ul class="list has-text-right has-text-grey-dark">
 					<li class="current"><a href="HomePage.html">Home</a></li>
-					<li><a href="reservations.html">Make a Reservation</a></li>
+					<li><a href="ReservationForm.html">Make a Reservation</a></li>
 					<li><a href="profile.html">Profile</a></li>
 					<li><a href="index.html">Sign Out</a></li>
 				</ul>
@@ -34,8 +34,11 @@
 						<h2 id="reservationList">
 			               
 			            </h2>
+			            
 			            <form method="GET" action="ReservationServlet" name="seeReservations" onsubmit="loadReservations()">
 				            <input class="input is-primary" type="email" name="email" id="email" placeholder="Email">
+				            <br>
+				            <br>
 				            <input class="button is-primary" type="submit" name="seeRes" value="View Reservations">
 			            </form>
 					</div>
@@ -45,8 +48,30 @@
 				<div class="card">
 					<div class="card-content">
 						<div class="content">
-							<h3>Put message stream here (all messages to and from this user)</h3>
-							<h5>Text area to send message to hotel goes here</h5>
+							<h3 class="text has-text-weight-bold">If you would like to send a message to the host, you may do so here.</h3>
+							<div class="field">
+								<form method="post" action="MessageServlet" name="messages">
+									<div class="control">
+										<textarea class="textarea is-primary" name="messToHost" id="messToHost" placeholder="Enter message here"></textarea>
+									</div>
+									<br> 
+									<p>From:</p>
+									<input class="input is-primary" type="email" name="fromWho" id="fromWho" placeholder="email">
+									<br>
+									<br>
+									<input class="button is-primary" type="submit" name="submitMess" value="Submit Message">
+								</form>
+								<br>
+								<br>
+								<form method="get" action="MessageServlet" name="messages">
+									<p class="text has-text-weight-bold">To view message thread between you and the host enter email below and click view messages</p>
+									<input class="input is-primary" type="email" name="myUser" id="myUser" placeholder="email">
+									<br>
+									<br>
+									<input class = "button is-primary" type="submit" name="myUser" value="View Messages">
+								</form>
+								<div id="messToAndFrom"></div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -56,9 +81,9 @@
 					<div class="card-content">
 						<div class="content">
 							<form method="GET" action="RoomServlet" name="seeRooms" onsubmit="getSelection()">
-								<label class="container has-text-weight-bold" >View available hotel rooms here</label> 
+								<label class="container has-text-weight-bold" >In this section, you can view available rooms</label> 
 								<select name="whichLoc" id="availRooms">
-								
+									<option value="">Choose a location</option>
 									<option value="1">Midtown Location</option>
 									<option value="2">East Memphis Location</option>
 									<option value="3">Downtown Location</option>

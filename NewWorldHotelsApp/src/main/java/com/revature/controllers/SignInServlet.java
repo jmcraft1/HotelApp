@@ -43,14 +43,14 @@ public class SignInServlet extends HttpServlet {
 		
 		CustomerDao cd = new CustomerDao();
 		EmployeeDao ed = new EmployeeDao();
-		String retEmail = "<h3>Logged in as " + email + "</h3>";
+		//String retEmail = "<h3>Logged in as " + email + "</h3>";
 		if(cd.verifyCred(email, pass)) {
 			RequestDispatcher view = request.getRequestDispatcher("HomePage.html");
-			request.setAttribute("email", retEmail);
+			//request.setAttribute("email", retEmail);
 			view.forward(request, response);
 		} else if (ed.verifyCred(email, pass)){
 			RequestDispatcher view = request.getRequestDispatcher("EmployeeHomePage.html");
-			request.setAttribute("email", retEmail);
+			//request.setAttribute("email", retEmail);
 			view.forward(request, response);
 		} else {
 			RequestDispatcher view = request.getRequestDispatcher("index.html");

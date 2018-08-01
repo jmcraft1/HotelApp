@@ -92,7 +92,6 @@ public class CustomerDao {
 	
 	public boolean verifyCred(String email, String pass) {
 		
-		//System.out.println(pass);
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
@@ -114,7 +113,6 @@ public class CustomerDao {
 				sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
 			}
 			String generatedPassword = sb.toString();
-			
 			return (generatedPassword.equals(e));
 		} catch (Exception ex) {
 			ex.printStackTrace();

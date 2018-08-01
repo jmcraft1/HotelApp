@@ -53,7 +53,7 @@ public class CreateCustomerServlet extends HttpServlet {
 		String pass = request.getParameter("pass");
 		
 		Customer c = new Customer(fName, lName, address, city, state, zip, phone, email, pass);
-		System.out.println("In CreateCustomerServlet: " + c.toString());
+		
 		CustomerDao cd = new CustomerDao();
 		
 		
