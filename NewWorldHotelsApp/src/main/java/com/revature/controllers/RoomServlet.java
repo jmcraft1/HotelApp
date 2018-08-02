@@ -33,7 +33,7 @@ public class RoomServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		String whichLocation = request.getParameter("whichLoc");
-		System.out.println("Entered roomservlet whichLocation = " + whichLocation);
+		
 		RoomDao rd = new RoomDao();
 		int countSingle = 0, countDouble = 0, countSuite = 0;
 		List<Room> rooms = rd.getAllAvailableRooms(whichLocation);
@@ -75,7 +75,24 @@ public class RoomServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String whichLocation = request.getParameter("whichLoc");
+		String whatRoomType = request.getParameter("whatRoomType");
+		RoomDao rd = new RoomDao();
+		
+		List<Room> rooms = rd.getAllRooms(whichLocation, whatRoomType);
+		String tableString = "<table><thead><tr><th>Room Id</th><Room Number</th>";
+		tableString += "<th>Price/Night</th><th>Maximum Occupancy</th><th>Occupied</th></tr></thead><tbody><tr><td>";
+		for (int i = 0; i < rooms.size(); i++) {
+			tableString += rooms.get(i).getRoom_id() + "</td><td>" + rooms.get(i).getRoom_num() + "</td><td>" + rooms.get(i).getPrice_per_night();
+			tableString += "</td><td>" + rooms.get(i).getMax_occupancy() + "</td><td>" + rooms.get(i).getOccupied() + "</td></tr>";
+		}
+		
+		tableString += "</tbody></table><br><br><div class=\"box has-text-centered\">\r\n" + 
+				"				  	<a href=\"EmployeeHomePage.html\" class=\"button is-primary\">Back</a> \r\n" + 
+				"				  	<p id=\"butClicked\"></p>\r\n" + 
+				"				</div>";
+		PrintWriter pw = response.getWriter();
+		pw.println(tableString);
 	}
 
 }

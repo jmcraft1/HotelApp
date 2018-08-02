@@ -8,12 +8,109 @@
 	</head>
 	<body>
 		<section class="hero is-primary">
-				<div class="hero-body">
-					<div class="container">
-						<br>
-						<h1 class="title is-1">Welcome to the employee portal</h1>
+			<div class="hero-body">
+				<div class="container">
+					<br>
+					<h1 class="title is-1">Welcome to the employee portal</h1>
+				</div>
+			</div>
+        </section>
+        <div class="columns">
+				<div class="column">
+					<div class="card">
+						<div class="card-content">
+							<form method="post" action="Pixservlet" enctype='multipart/form-data' name="picUp" onsubmit="uploadPic">
+								<fieldset>
+									<legend class="legend has-text-weight-bold">Upload an image</legend>
+									<br>
+									<div>
+										<label>Name of picture:</label>
+										<input type="text" name="nameOfPic">
+									</div>
+									<br>
+									<div>
+										<label>Picture:</label>
+										<input type="file" name="pic" accept="image/png, image/jpeg, image/jpg">
+									</div>
+									<br>
+									<input class="button is-primary is-rounded" type="submit" name="submit" value="Submit">
+									<br>
+									<br>
+								</fieldset>
+							</form>		
+						</div>
 					</div>
 				</div>
-            </section>
+				<div class="column">
+					<div class="card">
+						<div class="card-content">
+							<div class="info">
+								<form method="post" action="RoomServlet">
+									<div class="text has-text-weight-bold">
+										View all rooms
+									</div>
+									<div>
+		                                <label class="container has-text-weight-bold" >Which location</label>
+		                                <select name="whichLocation" id="whichLoc">
+		                                    <option value="">Choose a location</option>
+		                                    <option value="1">Midtown Location</option>
+		                                    <option value="2">East Memphis Location</option>
+		                                    <option value="3">Downtown Location</option>
+		                                </select>
+                            		</div>
+                            		<br>
+		                            <div>
+		                                <label class="container has-text-weight-bold" >Please select a type of room.</label>
+		                                <select name="whatRoomType" id="whatRoom">
+		                                    <option value="">Choose a room type</option>
+		                                    <option value="single">Single</option>
+		                                    <option value="double">Double</option>
+		                                    <option value="suite">Suite</option>
+		                                </select>
+		                            </div>
+		                            <br>
+		                            <input class="button is-primary" type="submit" name="seeRooms" value="View rooms">
+								</form> 
+								<br>
+								<br>
+								<form method="get" action="CreateCustomerServlet">
+									<div class="guests has-text-weight-bold">
+										View all guests
+									</div>
+									<div>
+		                                <label class="container has-text-weight-bold" >Which location</label>
+		                                <select name="whichLocation" id="whichLocation">
+		                                    <option value="">Choose a location</option>
+		                                    <option value="1">Midtown Location</option>
+		                                    <option value="2">East Memphis Location</option>
+		                                    <option value="3">Downtown Location</option>
+		                                </select>
+                            		</div>
+                            		<br>
+		                            <div>
+		                                <label class="container has-text-weight-bold" >Please select a type of room.</label>
+		                                <select name="whatRoomType" id="whatRoom">
+		                                    <option value="">Choose a room type</option>
+		                                    <option value="single">Single</option>
+		                                    <option value="double">Double</option>
+		                                    <option value="suite">Suite</option>
+		                                </select>
+		                            </div>
+		                            <br>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="column">
+					<button type="button" onclick="viewMessages">View Messages</button>
+					<form method="get" action="HostMessageServlet">
+						<button type="button" onclick="replyToMessage">Reply to a Message</button>
+						<div id="messageReply">
+							
+						</div>
+					</form>
+				</div>
+			</div>
 	</body>
 </html>

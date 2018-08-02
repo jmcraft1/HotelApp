@@ -11,14 +11,24 @@ import com.revature.util.ConnectionUtil;
 
 public class RoomDao {
 
-	public List<Room> getAllRooms() {
+	public List<Room> getAllRooms(String location, String type) {
 		PreparedStatement ps = null;
 		Room r = null;
 		List<Room> rooms = new ArrayList<Room>();
 
+		System.out.println("Entered roomdao");
 		try (Connection conn = ConnectionUtil.getConnection()) {
-			String sql = "SELECT * FROM ROOM";
+			System.out.println("Entered try");
+			String sql = "SELECT * FROM ROOMS WHERE HOTEL_ID = ? AND ROOM_TYPE = ?";
 			ps = conn.prepareStatement(sql);
+			if(location.equals("1")) {
+				ps.setInt(1,  1);
+			} else if (location.equals("2")) {
+				ps.setInt(1,  2);
+			} else if (location.equals("3")) {
+				ps.setInt(1,  3);
+			}
+			ps.setString(2,  type.toUpperCase());
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {

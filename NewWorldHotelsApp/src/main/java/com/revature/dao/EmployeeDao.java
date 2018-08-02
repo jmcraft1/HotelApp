@@ -47,7 +47,7 @@ public class EmployeeDao {
 		return employees;
 	}
 	
-public boolean verifyCred(String email, String pass) {
+	public boolean verifyCred(String email, String pass) {
 		
 		//System.out.println(pass);
 		PreparedStatement ps = null;
@@ -55,12 +55,48 @@ public boolean verifyCred(String email, String pass) {
 		
 		try (Connection conn = ConnectionUtil.getConnection()) {
 			String sql = "SELECT PASSWORD FROM EMPLOYEE WHERE EMAIL = ?";
+			//String sql = "SELECT PASSWORD, AUTHORIZED FROM EMPLOYEE WHERE EMAIL = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, email);
 			rs = ps.executeQuery();
 			String e = "";
+			//String a = "";
 			while (rs.next()) {
 				e = rs.getString("password");
+				// a = rs.getString("authorized");
+			}
+			
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(pass.getBytes());
+			byte[] bytes = md.digest();
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < bytes.length; i++) {
+				sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+			}
+			String generatedPassword = sb.toString();
+			
+			return (generatedPassword.equals(e));
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean verifyManager(String email, String pass) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			//String sql = "SELECT PASSWORD FROM EMPLOYEE WHERE EMAIL = ?";
+			String sql = "SELECT PASSWORD, AUTHORIZED FROM EMPLOYEE WHERE EMAIL = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
+			rs = ps.executeQuery();
+			String e = "";
+			String a = "";
+			while (rs.next()) {
+				e = rs.getString("password");
+				a = rs.getString("authorized");
 			}
 			System.out.println(e);
 			MessageDigest md = MessageDigest.getInstance("MD5");
@@ -72,11 +108,10 @@ public boolean verifyCred(String email, String pass) {
 			}
 			String generatedPassword = sb.toString();
 			System.out.println(generatedPassword);
-			return (generatedPassword.equals(e));
+			return (generatedPassword.equals(e) && a.equals("Y"));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		return false;
-		
 	}
 }

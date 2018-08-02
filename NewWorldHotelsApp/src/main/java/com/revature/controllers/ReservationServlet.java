@@ -40,30 +40,30 @@ public class ReservationServlet extends HttpServlet {
 		
 		String reservationTable = "<table><thead><tr><th>Location</th><th>Address</th><th>Room Type</th><th>Check In</th><th>Check Out</th><th>Price></th>";
 		reservationTable += "</tr></thead><tbody><tr><td>";
-		if (res.get(0).getRoom_id() > 0 && res.get(0).getRoom_id() < 101) {
+		if (res.get(0).getHotel_id() == 1) {
 			reservationTable += "Midtown Location</td><td>1888 Madison</td><td>";
-			if (res.get(0).getRoom_id() < 41) {
+			if (res.get(0).getRoom_type().equalsIgnoreCase("single")) {
 				reservationTable += "Single</td><td>";
-			} else if (res.get(0).getRoom_id() < 91) {
+			} else if (res.get(0).getRoom_type().equalsIgnoreCase("double")) {
 				reservationTable += "Double</td><td>";
 			} else {
 				reservationTable += "Suite</td><td>";
 			}
 			
-		} else if (res.get(0).getRoom_id() > 100 && res.get(0).getRoom_id() < 201) {
+		} else if (res.get(0).getHotel_id() == 2) {
 			reservationTable += "East Memphis Location</td><td>6284 Poplar</td><td>";
-			if (res.get(0).getRoom_id() < 141) {
+			if (res.get(0).getRoom_type().equalsIgnoreCase("single")) {
 				reservationTable += "Single</td><td>";
-			} else if (res.get(0).getRoom_id() < 191) {
+			} else if (res.get(0).getRoom_type().equalsIgnoreCase("double")) {
 				reservationTable += "Double</td><td>";
 			} else {
 				reservationTable += "Suite</td><td>";
 			}
-		}else if (res.get(0).getRoom_id() > 200 && res.get(0).getRoom_id() < 301) {
+		}else if (res.get(0).getHotel_id() == 3) {
 			reservationTable += "Downtown Location</td><td>212 Danny Thomas</td><td>";
-			if (res.get(0).getRoom_id() < 241) {
+			if (res.get(0).getRoom_type().equalsIgnoreCase("single")) {
 				reservationTable += "Single</td><td>";
-			} else if (res.get(0).getRoom_id() < 291) {
+			} else if (res.get(0).getRoom_type().equalsIgnoreCase("double")) {
 				reservationTable += "Double</td><td>";
 			} else {
 				reservationTable += "Suite</td><td>";
@@ -90,20 +90,31 @@ public class ReservationServlet extends HttpServlet {
 		String whatRoom = request.getParameter("whatRoom");
 		String checkIn = request.getParameter("checkIn");
 		String checkOut = request.getParameter("checkOut");
-		Date checkInDate = null;
-		Date checkOutDate = null;
-		try {
-			checkInDate = new SimpleDateFormat("yyyy-MM-dd").parse(checkIn);
-			checkOutDate = new SimpleDateFormat("yyyy-MM-dd").parse(checkOut);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		// try this line in the reservationDao to convert date type to sql date type
 		// preparedStatement.setDate(index, new java.sql.Date(date.getTime()));
 		ReservationDao rd = new ReservationDao();
-		boolean success = rd.makeReservation(email, whichLoc, whatRoom, checkInDate, checkOutDate);
+		
+		if (rd.makeReservation(email, whichLoc, whatRoom, checkIn, checkOut)) {
+			String resConfirmation = "<h4>Your reservation has been made</h4>";
+			resConfirmation += "<br><br><div class=\"box has-text-centered\">\r\n" + 
+					"				  	<a href=\"HomePage.html\" class=\"button is-primary\">Back</a> \r\n" + 
+					"				  	<p id=\"butClicked\"></p>\r\n" + 
+					"				</div>";
+			PrintWriter pw = response.getWriter();
+			pw.println(resConfirmation);
+		} else {
+			String resConfirmation = "<h4>Failed to make reservation, please try again later</h4>";
+			resConfirmation += "<br><br><div class=\"box has-text-centered\">\r\n" + 
+					"				  	<a href=\"HomePage.html\" class=\"button is-primary\">Back</a> \r\n" + 
+					"				  	<p id=\"butClicked\"></p>\r\n" + 
+					"				</div>";
+			PrintWriter pw = response.getWriter();
+			pw.println(resConfirmation);
+		}
+		
+		
+		
 		
 	}
 

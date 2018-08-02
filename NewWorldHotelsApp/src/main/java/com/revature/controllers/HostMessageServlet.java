@@ -14,15 +14,15 @@ import com.revature.dao.MessengerDao;
 import com.revature.model.Messages;
 
 /**
- * Servlet implementation class MessageServlet
+ * Servlet implementation class HostMessageServlet
  */
-public class MessageServlet extends HttpServlet {
+public class HostMessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MessageServlet() {
+    public HostMessageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,18 +32,16 @@ public class MessageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String email = request.getParameter("myUser");
 		MessengerDao md = new MessengerDao();
 		List<Messages> list = new ArrayList<>();
-		
-		list = md.getMessages(email);
+		list = md.getHostMessages();
 		if (list.size() > 0) {
 			String retSt = "<table><thead><tr><th>From</th><th>To</th><th>Message</th></tr></thead><tbody>";
 			for (int i = 0; i < list.size(); i++) {
 				retSt += "<tr><td>" + list.get(i).getMessageFrom() + "</td><td>" + list.get(i).getMessageTo() + "</td><td>" + list.get(i).getMessage() + "</td></tr>";
 			}
 			retSt += "</tbody></table><br><br><div class=\"box has-text-centered\">\r\n" + 
-					"				  	<a href=\"HomePage.html\" class=\"button is-primary\">Back</a> \r\n" + 
+					"				  	<a href=\"EmployeeHomePage.html\" class=\"button is-primary\">Back</a> \r\n" + 
 					"				  	<p id=\"butClicked\"></p>\r\n" + 
 					"				</div>";
 			PrintWriter pw = response.getWriter();
@@ -53,7 +51,6 @@ public class MessageServlet extends HttpServlet {
 			PrintWriter pw = response.getWriter();
 			pw.println("<p>No messages</p>");
 		}
-		
 	}
 
 	/**
@@ -61,16 +58,7 @@ public class MessageServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String email = request.getParameter("fromWho");
-		String message = request.getParameter("messToHost");
-		MessengerDao md = new MessengerDao();
-		if (md.sendMessage(email, message)) {
-			PrintWriter pw = response.getWriter();
-			pw.println("<p>Message has been sent</p><br><br><div class=\\\"box has-text-centered\\\">\\r\\n\" + \r\n" + 
-					"					\"				  	<a href=\\\"HomePage.html\\\" class=\\\"button is-primary\\\">Back</a> \\r\\n\" + \r\n" + 
-					"					\"				  	<p id=\\\"butClicked\\\"></p>\\r\\n\" + \r\n" + 
-					"					\"				</div>");
-		}
+		doGet(request, response);
 	}
 
 }

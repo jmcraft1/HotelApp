@@ -59,4 +59,34 @@
     <servlet-name>MessageServlet</servlet-name>
     <url-pattern>/MessageServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>TimeClockServlet</display-name>
+    <servlet-name>TimeClockServlet</servlet-name>
+    <servlet-class>com.revature.controllers.TimeClockServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TimeClockServlet</servlet-name>
+    <url-pattern>/TimeClockServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Pixservlet</display-name>
+    <servlet-name>Pixservlet</servlet-name>
+    <servlet-class>com.revature.controllers.Pixservlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Pixservlet</servlet-name>
+    <url-pattern>/Pixservlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>HostMessageServlet</display-name>
+    <servlet-name>HostMessageServlet</servlet-name>
+    <servlet-class>com.revature.controllers.HostMessageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HostMessageServlet</servlet-name>
+    <url-pattern>/HostMessageServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

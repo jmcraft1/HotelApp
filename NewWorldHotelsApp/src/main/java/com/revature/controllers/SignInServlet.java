@@ -48,7 +48,12 @@ public class SignInServlet extends HttpServlet {
 			RequestDispatcher view = request.getRequestDispatcher("HomePage.html");
 			//request.setAttribute("email", retEmail);
 			view.forward(request, response);
-		} else if (ed.verifyCred(email, pass)){
+		} /*else if (ed.verifyManager(email, pass)) {
+		 	RequestDispatcher view = request.getRequestDispatcher("ManagerHomePage.html");
+		 	view.forward(request, response);
+		} 
+		*/
+		else if (ed.verifyCred(email, pass)){
 			RequestDispatcher view = request.getRequestDispatcher("EmployeeHomePage.html");
 			//request.setAttribute("email", retEmail);
 			view.forward(request, response);

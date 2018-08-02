@@ -47,3 +47,36 @@ function getMessages() {
     xhr.open('GET', '/NewWorldHotelsApp/MessageServlet');
     xhr.send();
 }
+
+function uploadPic() {
+	let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        console.log(this.readyState);
+
+        if (this.readyState == 4) {
+            if (this.status == 200) {
+                
+            } else {
+                console.log("error");
+            }   
+        }
+    }
+
+    xhr.open('GET', '/NewWorldHotelsApp/Pixservlet');
+    xhr.send();
+}
+
+function viewMessages () {
+	let xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			document.getElementById('messageReply').innerHTML = xhr.responseText;
+		} else {
+			console.log("error");
+		}
+	}
+	
+
+	xhr.open('GET', 'messReply.txt');
+	xhr.send();
+}
