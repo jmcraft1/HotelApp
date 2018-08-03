@@ -13,6 +13,12 @@
 					<br>
 					<h1 class="title is-1">Welcome to the employee portal</h1>
 				</div>
+				<nav>
+				<ul class="list has-text-right has-text-grey-dark">
+					<li class="current"><a href="EmployeeHomePage.html">Home</a></li>
+					<li><a href="index.html">Sign Out</a></li>
+				</ul>
+			</nav>
 			</div>
         </section>
         <div class="columns">
@@ -39,6 +45,31 @@
 								</fieldset>
 							</form>		
 						</div>
+						<br>
+						<form method="post" action="CheckInServlet">
+							<br>
+							<p class="text has-text-weight-bold">Check in a guest</p>
+							<br>
+							<div>
+		                    	<label class="container has-text-weight-bold" >Which location</label>
+		                        <select name="whichLocation" id="whichLocation">
+		                        	<option value="">Choose a location</option>
+		                            <option value="1">Midtown Location</option>
+		                            <option value="2">East Memphis Location</option>
+		                            <option value="3">Downtown Location</option>
+		                        </select>
+							</div>
+							<br>
+                            <div>
+                            	<p class="text has-text-weight-bold">What room number would you like to assign the guest?</p>
+                            	<input class="input is-primary" type="text" name="room_num" id="room_num" placeholder="Room Number">
+								<br>
+								<br>
+								<input class="input is-primary" type="text" name="email" id="email" placeholder="Guest email">
+								<br><br>
+                            	<input class="button is-primary is-rounded" type="submit" name="checkInGuest" value="ChecK In Guest">
+                            </div>
+						</form>
 					</div>
 				</div>
 				<div class="column">
@@ -69,7 +100,7 @@
 		                                </select>
 		                            </div>
 		                            <br>
-		                            <input class="button is-primary" type="submit" name="seeRooms" value="View rooms">
+		                            <input class="button is-primary is-rounded" type="submit" name="seeRooms" value="View rooms">
 								</form> 
 								<br>
 								<br>
@@ -87,30 +118,49 @@
 		                                </select>
                             		</div>
                             		<br>
-		                            <div>
-		                                <label class="container has-text-weight-bold" >Please select a type of room.</label>
-		                                <select name="whatRoomType" id="whatRoom">
-		                                    <option value="">Choose a room type</option>
-		                                    <option value="single">Single</option>
-		                                    <option value="double">Double</option>
-		                                    <option value="suite">Suite</option>
-		                                </select>
-		                            </div>
-		                            <br>
+		                            <input class="button is-primary is-rounded" type="submit" name="seeGuests" value="View guests">
 								</form>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="column">
-					<button type="button" onclick="viewMessages">View Messages</button>
-					<form method="get" action="HostMessageServlet">
-						<button type="button" onclick="replyToMessage">Reply to a Message</button>
+					<br>
+					<div>
+						<button class="button is-primary is-rounded" type="button" onclick="viewMessages()">View Messages</button>
+					</div>
+					<br>
+					<button class="button is-primary is-rounded" type="button" onclick="replyToMessage()">Reply to a Message</button>
+					<form method="get" action="HostMessageServlet" name="viewMessages">
 						<div id="messageReply">
 							
 						</div>
 					</form>
+					<br><br><br>
+					<div>
+						<p class="text has-text-weight-bold">
+							To approve/deny reservation:
+						</p>
+						<form method="get" action="CheckInServlet">
+							<input class="button is-primary is-rounded" type="submit" name="getRes" value="Get Pending Reservations">
+						</form>
+					</div>
+					<br>
+					<div>
+						<p class="text has-text-weight-bold">
+							Then enter email address of customer and click approve/deny
+						</p>
+						<form method="post" action="StatusServlet">
+							<input type="text" name="email" id="email" placeholder="Customer email">
+							<br><br>
+							<input type="text" name="aOrD" id="aOrD" placeholder="Approve or Deny">
+							<input class="button is-primary is-rounded" type="submit" name="submit" value="Approve/Deny">
+						</form>
+					</div>
 				</div>
 			</div>
 	</body>
+	<script src = "HotelAjax.js">
+	</script>
+	<script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
 </html>

@@ -66,10 +66,10 @@ public class MessageServlet extends HttpServlet {
 		MessengerDao md = new MessengerDao();
 		if (md.sendMessage(email, message)) {
 			PrintWriter pw = response.getWriter();
-			pw.println("<p>Message has been sent</p><br><br><div class=\\\"box has-text-centered\\\">\\r\\n\" + \r\n" + 
-					"					\"				  	<a href=\\\"HomePage.html\\\" class=\\\"button is-primary\\\">Back</a> \\r\\n\" + \r\n" + 
-					"					\"				  	<p id=\\\"butClicked\\\"></p>\\r\\n\" + \r\n" + 
-					"					\"				</div>");
+			pw.println("<p>Message has been sent</p><br><div class=\"box has-text-centered\">\r\n" + 
+									"				  	<a href=\"HomePage.html\" class=\"button is-primary\">Back</a> \r\n" + 
+									"				  	<p id=\"butClicked\"></p>\r\n" + 
+									"				</div>");
 		}
 	}
 

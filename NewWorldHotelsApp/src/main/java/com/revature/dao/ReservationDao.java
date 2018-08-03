@@ -22,12 +22,12 @@ public class ReservationDao {
 		List<Reservations> rservs = new ArrayList<Reservations>();
 		int cust_id = 0;
 		try (Connection conn = ConnectionUtil.getConnection()) {
-			String sql = "SELECT CUST_ID FROM CUSTOMER WHERE EMAIL = ?";
+			String sql = "SELECT CUSTOMER_ID FROM CUSTOMER WHERE EMAIL = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, email);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				cust_id = rs.getInt("cust_id");
+				cust_id = rs.getInt("customer_id");
 			}
 			rs.close();
 			ps.close();
@@ -41,7 +41,7 @@ public class ReservationDao {
 		Date checkIn = null;
 		Date checkOut = null;
 		try (Connection conn = ConnectionUtil.getConnection()) {
-			String sql = "SELECT * FROM RESERVATIONS WHERE CUST_ID = ?";
+			String sql = "SELECT * FROM RESERVATIONS WHERE CUSTOMER_ID = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, cust_id);
 			ResultSet rs = ps.executeQuery();
@@ -54,7 +54,8 @@ public class ReservationDao {
 				price = rs.getDouble("price");
 				checkIn = rs.getDate("check_in_date");
 				checkOut = rs.getDate("check_out_date");
-				res = new Reservations(reservation_id, hotel_id, room_type, cust_id, checkIn, checkOut, price);
+				String status = rs.getString("status");
+				res = new Reservations(reservation_id, hotel_id, room_type, cust_id, checkIn, checkOut, price, status);
 				rservs.add(res);
 			}
 			rs.close();
@@ -74,7 +75,6 @@ public class ReservationDao {
 		SimpleDateFormat sdf1 = new SimpleDateFormat("MM-dd-yyyy");
 		Date checkInDate = null;
 		Date checkOutDate = null;
-		System.out.println(checkIn);
 		String cid = checkIn.substring(5, 8);
 		cid += checkIn.substring(8) + "-";
 		cid += checkIn.substring(0, 4);
@@ -93,7 +93,6 @@ public class ReservationDao {
 		
 		
 		PreparedStatement ps = null;
-		Reservations res = null;
 		int cust_id = 0;
 		try (Connection conn = ConnectionUtil.getConnection()) {
 			String sql = "SELECT CUSTOMER_ID FROM CUSTOMER WHERE EMAIL = ?";
@@ -110,8 +109,8 @@ public class ReservationDao {
 		}
 		
 		try (Connection conn = ConnectionUtil.getConnection()) {
-			String sql = "INSERT INTO RESERVATIONS (HOTEL_ID, ROOM_TYPE, CUSTOMER_ID, CHECK_IN_DATE, CHECK_OUT_DATE, PRICE) ";
-			sql += "VALUES (?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO RESERVATIONS (HOTEL_ID, ROOM_TYPE, CUSTOMER_ID, CHECK_IN_DATE, CHECK_OUT_DATE, PRICE, STATUS) ";
+			sql += "VALUES (?, ?, ?, ?, ?, ?, ?)";
 			ps = conn.prepareStatement(sql);
 			if (whichLoc.equals("1")) {
 				ps.setInt(1, 1);
@@ -138,6 +137,7 @@ public class ReservationDao {
 			}
 			
 			ps.setDouble(6,  multiplier * nights);
+			ps.setString(7, "Pending");
 			int i = ps.executeUpdate();
 			ps.close();
 			return (i > 0);
@@ -146,6 +146,64 @@ public class ReservationDao {
 		}
 
 		return false;
+	}
+	
+	public boolean checkInGuest(String email, String room_num, String location) {
+		PreparedStatement ps = null;
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			
+			String sql = "UPDATE ROOMS SET CUSTOMER_EMAIL = ?, OCCUPIED = ? WHERE HOTEL_ID = ? AND ROOM_NUM = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1,  email);
+			ps.setString(2,  "Y");
+			if (location.equals("1")) {
+				ps.setInt(3, 1);
+			} else if (location.equals("2")) {
+				ps.setInt(3, 2);
+			} else {
+				ps.setInt(3, 3);
+			}
+			ps.setString(4, room_num);
+			int i = ps.executeUpdate();
+			ps.close();
+			return (i > 0);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		
+		return false;
+		
+	}
+	
+	public List<Reservations> getPendingReservations() {
+		List<Reservations> list = new ArrayList<>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			String sql = "SELECT * FROM RESERVATIONS WHERE STATUS = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, "Pending");
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				int res_id = rs.getInt("reservation_id");
+				int hotel_id = rs.getInt("hotel_id");
+				int cust_id = rs.getInt("customer_id");
+				String roomType = rs.getString("room_type");
+				String status = rs.getString("status");
+				double price = rs.getDouble("price");
+				Date cIn = rs.getDate("check_in_date");
+				Date cOut = rs.getDate("check_out_date");
+				Reservations r = new Reservations(res_id, hotel_id, roomType, cust_id, cIn, cOut, price, status);
+				list.add(r);
+			}
+			rs.close();
+			ps.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return list;
 	}
 	
 	

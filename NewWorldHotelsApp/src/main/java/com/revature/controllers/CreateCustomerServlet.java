@@ -2,6 +2,7 @@ package com.revature.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.revature.dao.CustomerDao;
+import com.revature.dao.RoomDao;
 import com.revature.model.Customer;
+import com.revature.model.Room;
 
 /**
  * Servlet implementation class CreateCustomerServlet
@@ -33,7 +36,22 @@ public class CreateCustomerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String location = request.getParameter("whichLocation");
+		RoomDao rd = new RoomDao();
+		List<Room> rooms = rd.getAllGuests(location); 
+		System.out.println(rooms.get(0).toString());
+		String guestList = "<table><thead><tr><th>Guest Email</th><th>Room Type</th><th>Room Number</th></tr></thead><tbody>";
+		for (int i = 0; i < rooms.size(); i++) {
+			guestList += "<tr><td>" + rooms.get(i).getCust_email() + "</td><td>" + rooms.get(i).getRoom_type() + "</td><td>" + rooms.get(i).getRoom_num() + "</td></tr>";
+		}
+		guestList += "</tbody></table>";
+		guestList += "<div class=\"box has-text-centered\">\r\n" + 
+								"				  	<a href=\"EmployeeHomePage.html\" class=\"button is-primary\">Back</a> \r\n" +  
+								"				  	<p id=\"butClicked\"></p>\r\n" +  
+								"				</div>";
+		PrintWriter pw = response.getWriter();
+		pw.println(guestList);
+		
 	}
 
 	/**

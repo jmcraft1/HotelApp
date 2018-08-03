@@ -2,9 +2,6 @@ package com.revature.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -38,7 +35,7 @@ public class ReservationServlet extends HttpServlet {
 		ReservationDao rd = new ReservationDao();
 		List<Reservations> res = rd.getMyReservations(email);
 		
-		String reservationTable = "<table><thead><tr><th>Location</th><th>Address</th><th>Room Type</th><th>Check In</th><th>Check Out</th><th>Price></th>";
+		String reservationTable = "<table><thead><tr><th>Location</th><th>Address</th><th>Room Type</th><th>Check In</th><th>Check Out</th><th>Price</th><th>Status</th>";
 		reservationTable += "</tr></thead><tbody><tr><td>";
 		if (res.get(0).getHotel_id() == 1) {
 			reservationTable += "Midtown Location</td><td>1888 Madison</td><td>";
@@ -70,7 +67,7 @@ public class ReservationServlet extends HttpServlet {
 			}
 		}
 		reservationTable += res.get(0).getCheck_in_date() + "</td><td>" + res.get(0).getCheck_out_date() + "</td><td>";
-		reservationTable += res.get(0).getTotal_price() + "</td></tr></tbody></table>";
+		reservationTable += res.get(0).getTotal_price() + "</td><td>" + res.get(0).getStatus() + "</td></tr></tbody></table>";
 		reservationTable += "<br><br><div class=\"box has-text-centered\">\r\n" + 
 				"				  	<a href=\"HomePage.html\" class=\"button is-primary\">Back</a> \r\n" + 
 				"				  	<p id=\"butClicked\"></p>\r\n" + 
@@ -96,13 +93,13 @@ public class ReservationServlet extends HttpServlet {
 		ReservationDao rd = new ReservationDao();
 		
 		if (rd.makeReservation(email, whichLoc, whatRoom, checkIn, checkOut)) {
-			String resConfirmation = "<h4>Your reservation has been made</h4>";
-			resConfirmation += "<br><br><div class=\"box has-text-centered\">\r\n" + 
-					"				  	<a href=\"HomePage.html\" class=\"button is-primary\">Back</a> \r\n" + 
-					"				  	<p id=\"butClicked\"></p>\r\n" + 
-					"				</div>";
+			String s = "<p>Reservation made. Status pending</p>";
+			s += "<div class=\"box has-text-centered\">\r\n" +
+									"				  	<a href=\"HomePage.html\" class=\"button is-primary\">Back</a> \r\n" +  
+									"				  	<p id=\"butClicked\"></p>\r\n" +  
+									"				</div>";
 			PrintWriter pw = response.getWriter();
-			pw.println(resConfirmation);
+			pw.println(s);
 		} else {
 			String resConfirmation = "<h4>Failed to make reservation, please try again later</h4>";
 			resConfirmation += "<br><br><div class=\"box has-text-centered\">\r\n" + 

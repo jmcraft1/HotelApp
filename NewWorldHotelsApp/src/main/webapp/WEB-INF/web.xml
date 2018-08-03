@@ -89,4 +89,14 @@
     <servlet-name>HostMessageServlet</servlet-name>
     <url-pattern>/HostMessageServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CheckInServlet</display-name>
+    <servlet-name>CheckInServlet</servlet-name>
+    <servlet-class>com.revature.controllers.CheckInServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckInServlet</servlet-name>
+    <url-pattern>/CheckInServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

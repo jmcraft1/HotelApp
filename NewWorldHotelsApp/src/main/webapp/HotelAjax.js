@@ -66,8 +66,9 @@ function uploadPic() {
     xhr.send();
 }
 
-function viewMessages () {
+function replyToMessage () {
 	let xhr = new XMLHttpRequest();
+	console.log("entered replyToMessages");
 	xhr.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			document.getElementById('messageReply').innerHTML = xhr.responseText;
@@ -78,5 +79,32 @@ function viewMessages () {
 	
 
 	xhr.open('GET', 'messReply.txt');
+	xhr.send();
+}
+
+function viewMessages () {
+	let xhr = new XMLHttpRequest();
+	console.log("entered viewMessages");
+	xhr.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			document.getElementById('messageReply').innerHTML = xhr.responseText;
+		} else {
+			console.log("error");
+		}
+	}
+	
+
+	xhr.open('GET', 'HostMessageServlet');
+	xhr.send();
+}
+
+function getPendingReservations() {
+	let xhr = new XMLHttpRequesst();
+	xhr.onreadystatechange = function() {
+		if(this.readyState == 4 && this.status == 200) {
+			
+		}
+	}
+	xhr.open('GET', 'CheckInServlet');
 	xhr.send();
 }

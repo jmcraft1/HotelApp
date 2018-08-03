@@ -11,9 +11,10 @@ public class Reservations {
 	private Date check_in_date;
 	private Date check_out_date;
 	private double total_price;
+	private String status;
 
 	public Reservations(int reservation_id, int hotel_id, String room_type, int cust_id, Date check_in_date,
-			Date check_out_date, double total_price) {
+			Date check_out_date, double total_price, String status) {
 		super();
 		this.reservation_id = reservation_id;
 		this.hotel_id = hotel_id;
@@ -22,6 +23,15 @@ public class Reservations {
 		this.check_in_date = check_in_date;
 		this.check_out_date = check_out_date;
 		this.total_price = total_price;
+		this.status = status;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public Reservations() {

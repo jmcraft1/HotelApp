@@ -2,6 +2,13 @@ package com.revature.model;
 
 public class Room {
 
+	@Override
+	public String toString() {
+		return "Room [room_id=" + room_id + ", hotel_id=" + hotel_id + ", room_num=" + room_num + ", room_type="
+				+ room_type + ", price_per_night=" + price_per_night + ", max_occupancy=" + max_occupancy
+				+ ", occupied=" + occupied + ", cust_email=" + cust_email + "]";
+	}
+
 	private int room_id;
 	private int hotel_id;
 	private String room_num;
@@ -9,6 +16,7 @@ public class Room {
 	private double price_per_night;
 	private int max_occupancy;
 	private String occupied;
+	private String cust_email;
 
 	public Room(int room_id, int hotel_id, String room_num, String room_type, double price_per_night, int max_occupancy,
 			String occupied) {
@@ -20,6 +28,19 @@ public class Room {
 		this.price_per_night = price_per_night;
 		this.max_occupancy = max_occupancy;
 		this.occupied = occupied;
+	}
+
+	public Room(int room_id, int hotel_id, String room_num, String room_type, double price_per_night, int max_occupancy,
+			String occupied, String cust_email) {
+		super();
+		this.room_id = room_id;
+		this.hotel_id = hotel_id;
+		this.room_num = room_num;
+		this.room_type = room_type;
+		this.price_per_night = price_per_night;
+		this.max_occupancy = max_occupancy;
+		this.occupied = occupied;
+		this.cust_email = cust_email;
 	}
 
 	public Room() {
@@ -81,6 +102,14 @@ public class Room {
 
 	public void setOccupied(String occupied) {
 		this.occupied = occupied;
+	}
+
+	public String getCust_email() {
+		return cust_email;
+	}
+
+	public void setCust_email(String cust_email) {
+		this.cust_email = cust_email;
 	}
 
 }

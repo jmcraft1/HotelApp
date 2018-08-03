@@ -38,7 +38,7 @@ public class MessengerDao {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		ArrayList<Messages> list = new ArrayList<>();
-		System.out.println("entered messagedao with email: " + email);
+		
 		try (Connection conn = ConnectionUtil.getConnection()) {
 			String sql = "SELECT * FROM MESSAGES WHERE MESS_FROM = ? OR MESS_TO = ?";
 			ps = conn.prepareStatement(sql);
@@ -52,7 +52,6 @@ public class MessengerDao {
 				String message = rs.getString("message");
 				
 				Messages m = new Messages(to, from, message);
-				System.out.println(m.toString());
 				list.add(m);
 			}
 
