@@ -39,7 +39,7 @@ public class CreateCustomerServlet extends HttpServlet {
 		String location = request.getParameter("whichLocation");
 		RoomDao rd = new RoomDao();
 		List<Room> rooms = rd.getAllGuests(location); 
-		System.out.println(rooms.get(0).toString());
+		//System.out.println(rooms.get(0).toString());
 		String guestList = "<table><thead><tr><th>Guest Email</th><th>Room Type</th><th>Room Number</th></tr></thead><tbody>";
 		for (int i = 0; i < rooms.size(); i++) {
 			guestList += "<tr><td>" + rooms.get(i).getCust_email() + "</td><td>" + rooms.get(i).getRoom_type() + "</td><td>" + rooms.get(i).getRoom_num() + "</td></tr>";

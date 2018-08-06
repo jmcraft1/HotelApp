@@ -81,7 +81,7 @@ public class MessengerDao {
 				String message = rs.getString("message");
 				
 				Messages m = new Messages(to, from, message);
-				System.out.println(m.toString());
+				//System.out.println(m.toString());
 				list.add(m);
 			}
 
@@ -92,5 +92,24 @@ public class MessengerDao {
 		}
 		return list;
 		
+	}
+	
+	public boolean sendMessToCust(String toWhom, String messToCust) {
+		
+		PreparedStatement ps = null;
+		
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			String sql = "INSERT INTO MESSAGES VALUES (?, ?, ?)";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, "Host");
+			ps.setString(2, toWhom);
+			ps.setString(3,  messToCust);
+			int i = ps.executeUpdate();
+			ps.close();
+			return (i > 0);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return false;
 	}
 }

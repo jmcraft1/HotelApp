@@ -58,7 +58,18 @@ public class HostMessageServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String messToCust = request.getParameter("messToCust");
+		String toWhom = request.getParameter("toWhom");
+		MessengerDao md = new MessengerDao();
+		if (md.sendMessToCust(toWhom, messToCust)) {
+			String s = "<p>Reply successful</p>";
+			s += "<div class=\"box has-text-centered\">\r\n" +
+									"				  	<a href=\"EmployeeHomePage.html\" class=\"button is-primary\">Back</a> \r\n" +  
+									"				  	<p id=\"butClicked\"></p>\r\n" +  
+									"				</div>";
+			PrintWriter pw = response.getWriter();
+			pw.println(s);
+		}
 	}
 
 }

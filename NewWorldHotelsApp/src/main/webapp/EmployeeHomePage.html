@@ -127,15 +127,17 @@
 				<div class="column">
 					<br>
 					<div>
-						<button class="button is-primary is-rounded" type="button" onclick="viewMessages()">View Messages</button>
+						<form method="get" action="HostMessageServlet">
+							<input class="button is-primary is-rounded" type="submit" name="viewMess" value="View Messages">
+						</form>
 					</div>
 					<br>
 					<button class="button is-primary is-rounded" type="button" onclick="replyToMessage()">Reply to a Message</button>
-					<form method="get" action="HostMessageServlet" name="viewMessages">
-						<div id="messageReply">
+					
+					<div id="messageReply">
 							
-						</div>
-					</form>
+					</div>
+					
 					<br><br><br>
 					<div>
 						<p class="text has-text-weight-bold">
@@ -148,10 +150,10 @@
 					<br>
 					<div>
 						<p class="text has-text-weight-bold">
-							Then enter email address of customer and click approve/deny
+							Enter customer id, then enter "Approve" or "Deny" and click Approve/Deny
 						</p>
 						<form method="post" action="StatusServlet">
-							<input type="text" name="email" id="email" placeholder="Customer email">
+							<input type="text" name="cust_id" id="cust_id" placeholder="Customer Id">
 							<br><br>
 							<input type="text" name="aOrD" id="aOrD" placeholder="Approve or Deny">
 							<input class="button is-primary is-rounded" type="submit" name="submit" value="Approve/Deny">

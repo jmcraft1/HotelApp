@@ -99,4 +99,24 @@
     <servlet-name>CheckInServlet</servlet-name>
     <url-pattern>/CheckInServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>StatusServlet</display-name>
+    <servlet-name>StatusServlet</servlet-name>
+    <servlet-class>com.revature.controllers.StatusServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StatusServlet</servlet-name>
+    <url-pattern>/StatusServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PasswordServlet</display-name>
+    <servlet-name>PasswordServlet</servlet-name>
+    <servlet-class>com.revature.controllers.PasswordServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PasswordServlet</servlet-name>
+    <url-pattern>/PasswordServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -206,6 +206,29 @@ public class ReservationDao {
 		return list;
 	}
 	
+	public boolean updateStatus(String cust_id, String aOrD) {
+		
+		PreparedStatement ps = null;
+		
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			int cId = Integer.parseInt(cust_id);
+			String sql = "UPDATE RESERVATIONS SET STATUS = ? WHERE CUSTOMER_ID = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1,  aOrD);
+			ps.setInt(2, cId);
+			int i = ps.executeUpdate();
+			ps.close();
+			return (i > 0);
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		
+		
+		return false;
+	}
+	
 	
 }
 	

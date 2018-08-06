@@ -2,12 +2,45 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Profile Page</title>
+		<title>Change Password Page</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
 	</head>
 	<body>
-		
+		<section class="hero is-primary">
+			<div class="hero-body">
+				<div class="container">
+					<br>
+					<h1 class="title is-1 has-text-grey-dark">Welcome to your home page</h1>
+				</div>
+				<nav>
+					<ul class="list has-text-right has-text-grey-dark">
+						<li class="current"><a href="HomePage.html">Home</a></li>
+						<li><a href="ReservationForm.html">Make a Reservation</a></li>
+						<li><a href="index.html">Sign Out</a></li>
+					</ul>
+				</nav>
+			</div>
+		</section>
+		<div class="columns">
+			<div class="column">
+				<div class="card">
+					<div class="card-content">
+						<form method="post" action="PasswordServlet" name="updatePass">
+				            <input class="input is-primary" type="email" name="email" id="email" placeholder="Email">
+				            <input class="input is-primary" type="password" name="curPass" id="curPass" placeholder="Current Password">
+				            <input class="input is-primary" type="password" name="newPass" id="newPass" placeholder="New Password">
+				            <input class="input is-primary" type="password" name="confirmNewPass" id="confirmNewPass" placeholder="Confirm New Password">
+				            <br>
+				            <br>
+				            <input class="button is-primary" type="submit" name="seeRes" value="Update Password">
+			            </form>
+					</div>
+				</div>
+			</div>
+			<div class="column"></div>
+			<div class="column"></div>
+		</div>
 	</body>
 </html>

@@ -1,6 +1,6 @@
-<form method="post" action="MessageServlet" name="messages">
+<form method="post" action="HostMessageServlet" name="messages">
 	<div class="control">
-		<textarea class="textarea is-primary" name="messToHost" id="messToHost" placeholder="Enter message here"></textarea>
+		<input class="textarea is-primary" type="text" name="messToCust" id="messToCust" placeholder="Enter message here"></textarea>
 	</div>
 	<br> 
 	<p>From:</p>
@@ -8,6 +8,6 @@
 	<br>
 	<input class="input is-primary" type="email" name="toWhom" id="toWhom" placeholder="Recipient's email">
 	<br>
-	<input class="button is-primary" type="submit" name="submitMess" value="Submit Message">
+	<input class="button is-primary is-rounded" type="submit" name="submitMess" value="Submit Message">
 </form>
 

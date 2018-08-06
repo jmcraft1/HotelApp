@@ -98,7 +98,7 @@ public class EmployeeDao {
 				e = rs.getString("password");
 				a = rs.getString("authorized");
 			}
-			System.out.println(e);
+			//System.out.println(e);
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			md.update(pass.getBytes());
 			byte[] bytes = md.digest();
@@ -107,7 +107,7 @@ public class EmployeeDao {
 				sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
 			}
 			String generatedPassword = sb.toString();
-			System.out.println(generatedPassword);
+			//System.out.println(generatedPassword);
 			return (generatedPassword.equals(e) && a.equals("Y"));
 		} catch (Exception ex) {
 			ex.printStackTrace();
